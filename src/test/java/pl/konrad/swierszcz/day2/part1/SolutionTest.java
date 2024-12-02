@@ -1,4 +1,4 @@
-package pl.konrad.swierszcz.day1.part1;
+package pl.konrad.swierszcz.day2.part1;
 
 import org.junit.jupiter.api.Test;
 import pl.konrad.swierszcz.InputReader;
@@ -11,15 +11,15 @@ class SolutionTest {
     void shouldReturnCorrectAnswerForAoCExample() {
         //given
         //when//then
-        assertThat(Solution.getDistancesSummary(InputReader.readInput("day1/testInput.txt")))
-                .isEqualTo(11);
+        assertThat(Solution.countNumberOfSafeReports(InputReader.readInput("day2/testInput.txt")))
+                .isEqualTo(2L);
     }
 
     @Test
     void shouldReturnCorrectAnswerForAoCPuzzleInput() {
         //given
         //when//then
-        assertThat(Solution.getDistancesSummary(InputReader.readInput("day1/input.txt")))
-                .isEqualTo(257);
+        assertThat(Solution.countNumberOfSafeReports(InputReader.readInput("day2/input.txt")))
+                .isEqualTo(257L);
     }
 }
