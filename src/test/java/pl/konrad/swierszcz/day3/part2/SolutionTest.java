@@ -1,7 +1,9 @@
-package pl.konrad.swierszcz.day1.part1;
+package pl.konrad.swierszcz.day3.part2;
 
 import org.junit.jupiter.api.Test;
 import pl.konrad.swierszcz.InputReader;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,15 +13,15 @@ class SolutionTest {
     void shouldReturnCorrectAnswerForAoCExample() {
         //given
         //when//then
-        assertThat(Solution.getDistancesSummary(InputReader.readInput("day1/testInput.txt")))
-                .isEqualTo(11);
+        assertThat(Solution.getSumOfMultiplications(List.of("xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))")))
+                .isEqualTo(48L);
     }
 
     @Test
     void shouldReturnCorrectAnswerForAoCPuzzleInput() {
         //given
         //when//then
-        assertThat(Solution.getDistancesSummary(InputReader.readInput("day1/input.txt")))
-                .isEqualTo(2344935);
+        assertThat(Solution.getSumOfMultiplications(InputReader.readInput("day3/input.txt")))
+                .isEqualTo(78683433L);
     }
 }
