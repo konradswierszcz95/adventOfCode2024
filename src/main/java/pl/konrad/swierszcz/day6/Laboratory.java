@@ -1,13 +1,12 @@
-package pl.konrad.swierszcz.day6.part1;
+package pl.konrad.swierszcz.day6;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Laboratory {
-    private Field[][] map;
+    private final Field[][] map;
     private Guard guard;
     private final Set<Field> obstacles;
     private final int rowSize;
@@ -34,6 +33,7 @@ public class Laboratory {
                         map[y][x] = new Field(x, y, Field.Type.OCCUPIED);
                         guard = new Guard(x, y, Guard.FacingDirection.NORTH);
                     }
+                    default -> throw new RuntimeException("Unexpected char");
                 }
             }
         }
@@ -41,10 +41,6 @@ public class Laboratory {
         if (guard == null) {
             throw new RuntimeException("Guard not found");
         }
-    }
-
-    public Field[][] getMap() {
-        return map;
     }
 
     public void setField(int x, int y, Field.Type type) {
@@ -59,9 +55,8 @@ public class Laboratory {
         return guard;
     }
 
-    public Guard turnGuardRight() {
+    public void turnGuardRight() {
         guard.turnRight();
-        return guard;
     }
 
     public int getRowSize() {
@@ -79,19 +74,15 @@ public class Laboratory {
                 .count();
     }
 
-    public void printMap() {
-        System.out.println("\n\n\n");
-        System.out.println(
-                Arrays.stream(map)
-                        .map(row -> Arrays.stream(row)
-                                .map(f -> switch (f.type()) {
-                                    case EMPTY -> ".";
-                                    case OBSTACLE -> "#";
-                                    case OCCUPIED -> "X";
-                                })
-                                .collect(Collectors.joining(""))
-                        )
-                        .collect(Collectors.joining("\n"))
-    );
+    public boolean isFieldObstacle(int x, int y) {
+        return map[y][x].type().equals(Field.Type.OBSTACLE);
+    }
+
+    public void addObstacle(int x, int y) {
+        obstacles.add(map[y][x]);
+    }
+
+    public void removeObstacle(int x, int y) {
+        obstacles.remove(map[y][x]);
     }
 }

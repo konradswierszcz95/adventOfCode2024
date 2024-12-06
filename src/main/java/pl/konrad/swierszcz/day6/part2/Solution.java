@@ -1,9 +1,10 @@
-package pl.konrad.swierszcz.day6.part1;
+package pl.konrad.swierszcz.day6.part2;
 
 import pl.konrad.swierszcz.day6.Field;
 import pl.konrad.swierszcz.day6.Guard;
 import pl.konrad.swierszcz.day6.Laboratory;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -13,24 +14,60 @@ class Solution {
     private Solution() {
     }
 
-    public static long predictNumberOfVisitedPositions(List<String> inputs) {
+    public static long countPossibleLoopPositions(List<String> inputs) {
         var laboratory = new Laboratory(inputs);
+        long possiblePositionCount = 0L;
+        int guardStartX = laboratory.getGuard().getPosX();
+        int guardStartY = laboratory.getGuard().getPosY();
+
+        for (int y = 0; y < laboratory.getColumnSize(); y++) {
+            for (int x = 0; x < laboratory.getRowSize(); x++) {
+                if (laboratory.isFieldObstacle(x, y)) {
+                    continue;
+                }
+
+                if (isLooped(x, y, laboratory)) {
+                    possiblePositionCount++;
+                }
+
+                laboratory.getGuard().setPosX(guardStartX);
+                laboratory.getGuard().setPosY(guardStartY);
+                laboratory.getGuard().setDirection(Guard.FacingDirection.NORTH);
+            }
+
+        }
+
+        return possiblePositionCount;
+    }
+
+    private static boolean isLooped(int xPos, int yPos, Laboratory laboratory) {
+        laboratory.setField(xPos, yPos, Field.Type.OBSTACLE);
+        laboratory.addObstacle(xPos, yPos);
+        var obsctacles = new HashMap<Field, Integer>();
 
         Field nextObstacle = getNextObstacle(laboratory.getGuard(), laboratory.getObstacles());
+        obsctacles.put(nextObstacle, 1);
         while (nextObstacle != null) {
             visitAllFieldsToObstacle(laboratory, nextObstacle);
             laboratory.turnGuardRight();
             nextObstacle = getNextObstacle(laboratory.getGuard(), laboratory.getObstacles());
+
+            if (obsctacles.containsKey(nextObstacle) ) {
+                obsctacles.put(nextObstacle, obsctacles.get(nextObstacle) + 1);
+            } else {
+                obsctacles.put(nextObstacle, 1);
+            }
+
+            if (obsctacles.values().stream().anyMatch(i -> i > 3)) {
+                laboratory.removeObstacle(xPos, yPos);
+                laboratory.setField(xPos, yPos, Field.Type.EMPTY);
+                return true;
+            }
         }
 
-        switch (laboratory.getGuard().getDirection()) {
-            case NORTH -> visitAllFieldsToObstacle(laboratory, new Field(laboratory.getGuard().getPosX(), -1, Field.Type.OBSTACLE));
-            case EAST -> visitAllFieldsToObstacle(laboratory, new Field(laboratory.getRowSize(), laboratory.getGuard().getPosY(), Field.Type.OBSTACLE));
-            case SOUTH -> visitAllFieldsToObstacle(laboratory, new Field(laboratory.getGuard().getPosX(), laboratory.getColumnSize(), Field.Type.OBSTACLE));
-            case WEST -> visitAllFieldsToObstacle(laboratory, new Field(-1, laboratory.getGuard().getPosY(), Field.Type.OBSTACLE));
-        }
-
-        return laboratory.getNumberOfOccupiedFields();
+        laboratory.removeObstacle(xPos, yPos);
+        laboratory.setField(xPos, yPos, Field.Type.EMPTY);
+        return false;
     }
 
     private static Field getNextObstacle(Guard guard, Set<Field> obstacles) {
@@ -61,8 +98,6 @@ class Solution {
         int actualY = guard.getPosY() + guard.getDirection().yTensor;
 
         while (actualX != nextObstacle.xPos() || actualY != nextObstacle.yPos()) {
-            lab.setField(actualX, actualY, Field.Type.OCCUPIED);
-
             actualX += guard.getDirection().xTensor;
             actualY += guard.getDirection().yTensor;
         }

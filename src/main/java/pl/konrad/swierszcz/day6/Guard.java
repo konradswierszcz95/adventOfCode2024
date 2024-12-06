@@ -1,4 +1,4 @@
-package pl.konrad.swierszcz.day6.part1;
+package pl.konrad.swierszcz.day6;
 
 public class Guard {
     private int posX;
@@ -29,6 +29,10 @@ public class Guard {
 
     public FacingDirection getDirection() {
         return direction;
+    }
+
+    public void setDirection(FacingDirection direction) {
+        this.direction = direction;
     }
 
     public void turnRight() {
