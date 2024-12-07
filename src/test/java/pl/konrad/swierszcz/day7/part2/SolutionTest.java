@@ -28,6 +28,6 @@ class SolutionTest {
         //given
         //when//then
         assertThat(Solution.getSumOfCalibrationResults(InputReader.readInput("day7/input.txt")))
-                .isEqualTo(306L);
+                .isEqualTo(140575048428831L);
     }
 }
