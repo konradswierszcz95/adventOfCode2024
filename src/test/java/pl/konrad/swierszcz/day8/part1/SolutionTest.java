@@ -9,7 +9,7 @@ class SolutionTest {
 
     @Test
     void shouldReturnCorrectAnswerForAoCExample() {
-        //given
+        //givenasdf
         //when//then
         assertThat(Solution.getNumberOfAntinodes(InputReader.readInput("day8/testInput.txt")))
                 .isEqualTo(14L);
