@@ -14,4 +14,12 @@ class SolutionTest {
         assertThat(Solution.getFilesSum(InputReader.readInput("day9/example1.txt").getFirst()))
                 .isEqualTo(14L);
     }
+
+    @Test
+    void shouldReturnCorrectAnswerForAoCPuzzleInput() {
+        //given
+        //when//then
+        assertThat(Solution.getFilesSum(InputReader.readInput("day9/input.txt").getFirst()))
+                .isEqualTo(14L);
+    }
 }
