@@ -1,4 +1,4 @@
-package pl.konrad.swierszcz.day9.part1;
+package pl.konrad.swierszcz.day9.part2;
 
 import org.junit.jupiter.api.Test;
 import pl.konrad.swierszcz.InputReader;
@@ -12,7 +12,7 @@ class SolutionTest {
         //given
         //when//then
         assertThat(Solution.getFilesCheckSum(InputReader.readInput("day9/example1.txt").getFirst()))
-                .isEqualTo(60L);
+                .isEqualTo(132L);
     }
 
     @Test
@@ -20,7 +20,7 @@ class SolutionTest {
         //given
         //when//then
         assertThat(Solution.getFilesCheckSum(InputReader.readInput("day9/example2.txt").getFirst()))
-                .isEqualTo(1928L);
+                .isEqualTo(2858L);
     }
 
     @Test
@@ -28,6 +28,6 @@ class SolutionTest {
         //given
         //when//then
         assertThat(Solution.getFilesCheckSum(InputReader.readInput("day9/input.txt").getFirst()))
-                .isEqualTo(6330095022244L);
+                .isEqualTo(6359491814941L);
     }
 }

@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 import static java.lang.Math.abs;
 
 public class Solution {
+    private Solution() {}
+
     public static long getNumberOfAntinodes(List<String> input) {
         var region = new Region(input);
 
