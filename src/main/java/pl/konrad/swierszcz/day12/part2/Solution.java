@@ -3,13 +3,9 @@ package pl.konrad.swierszcz.day12.part2;
 import pl.konrad.swierszcz.day12.Position;
 import pl.konrad.swierszcz.day12.Region;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
-
-import static java.lang.Math.abs;
 
 class Solution {
     private Solution() {
@@ -77,30 +73,5 @@ class Solution {
         resultSet.addAll(eastExpansion);
         resultSet.addAll(westExpansion);
         return resultSet;
-    }
-
-    private static List<Position> detectRegion(Position position, List<Position> possiblePositions) {
-        var newPossiblePositions = possiblePositions.stream()
-                .filter(p -> !p.equals(position))
-                .toList();
-
-        if (newPossiblePositions.isEmpty()) {
-            return List.of(position);
-        }
-
-        List<Position> region = newPossiblePositions.stream()
-                .filter(p -> isNeighbour(position, p))
-                .flatMap(p -> detectRegion(p, newPossiblePositions).stream())
-                .toList();
-
-        return Stream.of(List.of(position), region)
-                .flatMap(Collection::stream)
-                .distinct()
-                .toList();
-    }
-
-    private static boolean isNeighbour(Position plant, Position neighbour) {
-        return (abs(plant.x() - neighbour.x()) == 1 && abs(plant.y() - neighbour.y()) == 0)
-                || (abs(plant.x() - neighbour.x()) == 0 && abs(plant.y() - neighbour.y()) == 1);
     }
 }
