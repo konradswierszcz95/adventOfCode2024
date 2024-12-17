@@ -1,4 +1,4 @@
-package pl.konrad.swierszcz.part16;
+package pl.konrad.swierszcz.day16;
 
 import java.util.List;
 

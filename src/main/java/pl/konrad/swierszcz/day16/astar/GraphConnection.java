@@ -1,4 +1,4 @@
-package pl.konrad.swierszcz.part16.astar;
+package pl.konrad.swierszcz.day16.astar;
 
 public record GraphConnection(GraphElement from, GraphElement to, long cost) {
 }

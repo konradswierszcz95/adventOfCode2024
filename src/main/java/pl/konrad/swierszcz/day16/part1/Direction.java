@@ -1,4 +1,4 @@
-package pl.konrad.swierszcz.part16.part1;
+package pl.konrad.swierszcz.day16.part1;
 
 public enum Direction {
     NORTH ("EAST", 0, -1),

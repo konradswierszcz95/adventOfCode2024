@@ -2,7 +2,7 @@ package pl.konrad.swierszcz.day16;
 
 import org.junit.jupiter.api.Test;
 import pl.konrad.swierszcz.InputReader;
-import pl.konrad.swierszcz.part16.part1.SolutionDjikstra;
+import pl.konrad.swierszcz.day16.part1.SolutionDjikstra;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

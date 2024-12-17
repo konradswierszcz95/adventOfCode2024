@@ -1,6 +1,6 @@
-package pl.konrad.swierszcz.part16.astar;
+package pl.konrad.swierszcz.day16.astar;
 
-import pl.konrad.swierszcz.part16.part1.Direction;
+import pl.konrad.swierszcz.day16.part1.Direction;
 
 import java.util.HashSet;
 import java.util.List;

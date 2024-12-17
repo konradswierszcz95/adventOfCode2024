@@ -1,6 +1,6 @@
-package pl.konrad.swierszcz.part16.part1;
+package pl.konrad.swierszcz.day16.part1;
 
-import pl.konrad.swierszcz.part16.Position;
+import pl.konrad.swierszcz.day16.Position;
 
 import java.util.Objects;
 
